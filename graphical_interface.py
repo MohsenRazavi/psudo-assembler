@@ -12,6 +12,8 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
+from assembler import *
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -30,13 +32,13 @@ class Ui_MainWindow(object):
         self.tab_widget.addTab(self.help_tab, "")
         self.code_tab = QtWidgets.QWidget()
         self.code_tab.setObjectName("code_tab")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.code_tab)
-        self.plainTextEdit.setGeometry(QtCore.QRect(0, 0, 1171, 521))
+        self.mainEditor = QtWidgets.QPlainTextEdit(self.code_tab)
+        self.mainEditor.setGeometry(QtCore.QRect(0, 0, 1171, 521))
         font = QtGui.QFont()
         font.setFamily("Yu Gothic UI")
         font.setPointSize(12)
-        self.plainTextEdit.setFont(font)
-        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.mainEditor.setFont(font)
+        self.mainEditor.setObjectName("mainEditor")
         self.run_button = QtWidgets.QPushButton(self.code_tab)
         self.run_button.setGeometry(QtCore.QRect(20, 600, 181, 51))
         font = QtGui.QFont()
@@ -44,6 +46,9 @@ class Ui_MainWindow(object):
         self.run_button.setFont(font)
         self.run_button.setAutoRepeatInterval(100)
         self.run_button.setObjectName("run_button")
+
+        self.run_button.clicked.connect(self.run)
+
         self.eax_value = QtWidgets.QTextBrowser(self.code_tab)
         self.eax_value.setGeometry(QtCore.QRect(310, 540, 121, 31))
         self.eax_value.setDocumentTitle("")
@@ -54,18 +59,18 @@ class Ui_MainWindow(object):
         self.ebx_vlue = QtWidgets.QTextBrowser(self.code_tab)
         self.ebx_vlue.setGeometry(QtCore.QRect(520, 540, 121, 31))
         self.ebx_vlue.setObjectName("ebx_vlue")
-        self.zero_flag_value = QtWidgets.QTextBrowser(self.code_tab)
-        self.zero_flag_value.setGeometry(QtCore.QRect(550, 610, 101, 31))
-        self.zero_flag_value.setObjectName("zero_flag_value")
+        self.overflow_flag_value = QtWidgets.QTextBrowser(self.code_tab)
+        self.overflow_flag_value.setGeometry(QtCore.QRect(550, 610, 101, 31))
+        self.overflow_flag_value.setObjectName("overflow_flag_value")
         self.ecx_value = QtWidgets.QTextBrowser(self.code_tab)
         self.ecx_value.setGeometry(QtCore.QRect(720, 540, 121, 31))
         self.ecx_value.setObjectName("ecx_value")
         self.negative_flag_value = QtWidgets.QTextBrowser(self.code_tab)
         self.negative_flag_value.setGeometry(QtCore.QRect(790, 610, 101, 31))
         self.negative_flag_value.setObjectName("negative_flag_value")
-        self.overflow_flag_value = QtWidgets.QTextBrowser(self.code_tab)
-        self.overflow_flag_value.setGeometry(QtCore.QRect(1030, 610, 101, 31))
-        self.overflow_flag_value.setObjectName("overflow_flag_value")
+        self.zero_flag_value = QtWidgets.QTextBrowser(self.code_tab)
+        self.zero_flag_value.setGeometry(QtCore.QRect(1030, 610, 101, 31))
+        self.zero_flag_value.setObjectName("zero_flag_value")
         self.edx_value = QtWidgets.QTextBrowser(self.code_tab)
         self.edx_value.setGeometry(QtCore.QRect(930, 540, 121, 31))
         self.edx_value.setObjectName("edx_value")
@@ -118,13 +123,13 @@ class Ui_MainWindow(object):
         self.negative_flag_label.setFont(font)
         self.negative_flag_label.setAlignment(QtCore.Qt.AlignCenter)
         self.negative_flag_label.setObjectName("negative_flag_label")
-        self.overflow_flag_label_2 = QtWidgets.QLabel(self.code_tab)
-        self.overflow_flag_label_2.setGeometry(QtCore.QRect(920, 610, 111, 31))
+        self.zero_flag_label = QtWidgets.QLabel(self.code_tab)
+        self.zero_flag_label.setGeometry(QtCore.QRect(920, 610, 111, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.overflow_flag_label_2.setFont(font)
-        self.overflow_flag_label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.overflow_flag_label_2.setObjectName("overflow_flag_label_2")
+        self.zero_flag_label.setFont(font)
+        self.zero_flag_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.zero_flag_label.setObjectName("zero_flag_label")
         self.read_from_file_button = QtWidgets.QPushButton(self.code_tab)
         self.read_from_file_button.setGeometry(QtCore.QRect(20, 540, 181, 51))
         font = QtGui.QFont()
@@ -150,7 +155,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.help_text.setPlaceholderText(_translate("MainWindow", "write code !"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.help_tab), _translate("MainWindow", "Help"))
-        self.plainTextEdit.setPlaceholderText(_translate("MainWindow", "your code ..."))
+        self.mainEditor.setPlaceholderText(_translate("MainWindow", "your code ..."))
         self.run_button.setText(_translate("MainWindow", "Run"))
         self.eax_label.setText(_translate("MainWindow", "eax"))
         self.ebx_label.setText(_translate("MainWindow", "ebx"))
@@ -159,7 +164,7 @@ class Ui_MainWindow(object):
         self.carry_flag_label.setText(_translate("MainWindow", "Carry Flag"))
         self.overflow_flag_label.setText(_translate("MainWindow", "Overflow Flag"))
         self.negative_flag_label.setText(_translate("MainWindow", "Negative Flag"))
-        self.overflow_flag_label_2.setText(_translate("MainWindow", "Overflow Flag"))
+        self.zero_flag_label.setText(_translate("MainWindow", "Zero Flag"))
         self.read_from_file_button.setText(_translate("MainWindow", "Read from .txt"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.code_tab), _translate("MainWindow", "Code"))
 
@@ -170,7 +175,22 @@ class Ui_MainWindow(object):
         file_dir = QFileDialog.getOpenFileName(filter="Text files (*.txt)", directory=os.getcwd())[0]
         with open(file_dir, "r") as file:
             extracted_code = file.read()
-        self.plainTextEdit.setPlainText(extracted_code)
+        self.mainEditor.setPlainText(extracted_code)
+
+    def run(self):
+        app.processEvents()
+        raw_code = str(self.mainEditor.toPlainText())
+        print(raw_code)
+        final_values = execute(raw_code)
+        self.eax_value.setText(final_values["eax"])
+        self.ebx_value.setText(final_values["ebx"])
+        self.ecx_value.setText(final_values["ecx"])
+        self.edx_value.setText(final_values["edx"])
+        self.carry_flag_value.setText(final_values["carry_flag"])
+        self.overflow_flag_value.setText(final_values["overflow_flag"])
+        self.zero_flag_value.setText(final_values["zero_flag"])
+        self.negative_flag_value.setText(final_values["negative_flag"])
+
 
 
 if __name__ == "__main__":
