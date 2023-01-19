@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1179</width>
+    <height>729</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tab_widget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1171</width>
+      <height>731</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="help_tab">
+     <attribute name="title">
+      <string>Help</string>
+     </attribute>
+     <widget class="QTextBrowser" name="help_text">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1171</width>
+        <height>681</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string>write code !</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="code_tab">
+     <attribute name="title">
+      <string>Code</string>
+     </attribute>
+     <widget class="QPlainTextEdit" name="plainTextEdit">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1171</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Yu Gothic UI</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string>your code ...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="run_button">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>600</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Run</string>
+      </property>
+      <property name="autoRepeatInterval">
+       <number>100</number>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="eax_value">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>540</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="documentTitle">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="carry_flag_value">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>610</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="ebx_vlue">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>540</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="zero_flag_value">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>610</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="ecx_value">
+      <property name="geometry">
+       <rect>
+        <x>720</x>
+        <y>540</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="negative_flag_value">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>610</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="overflow_flag_value">
+      <property name="geometry">
+       <rect>
+        <x>1030</x>
+        <y>610</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="edx_value">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>540</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="eax_label">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>550</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>eax</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="ebx_label">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>550</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ebx</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="ecx_label">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>550</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ecx</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="edx_label">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>550</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>edx</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="carry_flag_label">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>610</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Carry Flag</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="overflow_flag_label">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>610</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Overflow Flag</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="negative_flag_label">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>610</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Negative Flag</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="overflow_flag_label_2">
+      <property name="geometry">
+       <rect>
+        <x>920</x>
+        <y>610</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Overflow Flag</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="read_from_file_button">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>540</y>
+        <width>181</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Read from .txt</string>
+      </property>
+      <property name="autoRepeatInterval">
+       <number>100</number>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
