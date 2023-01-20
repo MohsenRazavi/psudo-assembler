@@ -43,8 +43,6 @@ def get_instructions(str_code):
 
             elif operation[1][:-1].strip() in edx_list:
                 destination = "edx"
-            # else:
-            #     destination = int(operation[1][:-1].strip())
 
             if operation[2].strip() in eax_list:
                 source = "eax"
@@ -66,17 +64,16 @@ def get_instructions(str_code):
 
 def execute(raw_code):
     instructions = get_instructions(raw_code)
+    eax = Eax()
+    ebx = Ebx()
+    ecx = Ecx()
+    edx = Edx()
 
-    register_flag_value = {
-        "eax": 0,
-        "ebx": 0,
-        "ecx": 0,
-        "edx": 0,
-        "carry_flag": 0,
-        "overflow_flag": 0,
-        "negative_flag": 0,
-        "carry_flag": 0,
-        "zero_flag": 0,
+    registers = {
+        "eax": eax,
+        "ebx": ebx,
+        "ecx": ecx,
+        "edx": edx,
     }
 
     and_ = And()
@@ -85,62 +82,18 @@ def execute(raw_code):
     add = Add()
     mov = Mov()
 
-    eax = Eax()
-    ebx = Ebx()
-    ecx = Ecx()
-    edx = Edx()
+    commands = {
+        "and": and_,
+        "or": or_,
+        "sub": sub,
+        "add": add,
+        "mov": mov
+    }
 
     for instruction in instructions:
-        pass
-    return register_flag_value
+        try:
+            commands[instruction[0]].res(registers[instruction[1]], registers[instruction[2]])
+        except:
+            commands[instruction[0]].res(registers[instruction[1]], instruction[2])
 
-    register_flag_value["eax"] = eax.value
-    register_flag_value["ebx"] = ebx.value
-    register_flag_value["ecx"] = ecx.value
-    register_flag_value["edx"] = edx.value
-
-    # if instruction[0] == "mov":
-    #     if instruction[1] == "eax":
-    #         if instruction[2] == "eax":
-    #             mov.res(eax, eax)
-    #
-    #         elif instruction[2] == "ebx":
-    #             mov.res(eax, ebx)
-    #
-    #         elif instruction[2] == "ecx":
-    #             mov.res(eax, ecx)
-    #
-    #         elif instruction[2] == "edx":
-    #             mov.res(eax, edx)
-    #         else:
-    #             source = int(instruction[2])
-    #             mov.res(eax, source)
-    #
-    #     elif instruction[1] == "ebx":
-    #         if instruction[2] == "eax":
-    #             mov.res(ebx, eax)
-    #
-    #         elif instruction[2] == "ebx":
-    #             mov.res(ebx, ebx)
-    #
-    #         elif instruction[2] == "ecx":
-    #             mov.res(ebx, ecx)
-    #
-    #         elif instruction[2] == "edx":
-    #             mov.res(ebx, edx)
-    #         else:
-    #             source = int(instruction[2])
-    #             mov.res(eax, source)
-    #     elif instruction[1] == "ecx":
-    #         destination = "ecx"
-    #
-    #     elif instruction[1] == "edx":
-    #         destination = "edx"
-    # elif instruction[0] == "add":
-    #     command = "add"
-    # elif instruction[0] == "sub":
-    #     command = "sub"
-    # elif instruction[0] == "and":
-    #     command = "and"
-    # elif instruction[0] == "or":
-    #     command = "or"
+    print(eax.value)

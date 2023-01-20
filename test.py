@@ -23,7 +23,7 @@ from assembler import *
 
 st = """
 mov eax, 2
-mov ebx, 4
+add eax, 4
 """
 
-print(get_instructions(st))
+execute(st)
