@@ -19,15 +19,17 @@ class And(Command):
         super(And, self).__init__()
 
     def res(self, destination, source):
-        if type(destination) != Register:
+        if not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value &= source.value
                 destination(dest_value, False)
+                return
             except:
                 destination(0, True)
                 dest_value &= source
                 destination(dest_value, False)
+                return
         try:
             destination.value &= source.value
         except:
@@ -45,15 +47,17 @@ class Or(Command):
         super(Or, self).__init__()
 
     def res(self, destination, source):
-        if type(destination) != Register:
+        if not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value |= source.value
                 destination(dest_value, False)
+                return
             except:
                 destination(0, True)
                 dest_value |= source
                 destination(dest_value, False)
+                return
         try:
             destination.value |= source.value
         except:
@@ -71,15 +75,17 @@ class Sub(Command):
         super(Sub, self).__init__()
 
     def res(self, destination, source):
-        if type(destination) != Register:
+        if not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value -= source.value
                 destination(dest_value, False)
+                return
             except:
                 destination(0, True)
                 dest_value -= source
                 destination(dest_value, False)
+                return
         try:
             destination.value -= source.value
         except:
@@ -97,15 +103,17 @@ class Add(Command):
         super(Add, self).__init__()
 
     def res(self, destination, source):
-        if type(destination) != Register:
+        if not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value += source.value
                 destination(dest_value, False)
+                return
             except:
                 destination(0, True)
                 dest_value += source
                 destination(dest_value, False)
+                return
         try:
             destination.value += source.value
         except:
@@ -123,6 +131,13 @@ class Mov(Command):
         super(Mov, self).__init__()
 
     def res(self, destination, source):
+        if not isinstance(destination, Register):
+            try:
+                destination(source, False)
+                return
+            except:
+                destination(source.value, False)
+                return
         try:
             destination.value = source.value
         except:
@@ -132,10 +147,4 @@ class Mov(Command):
                 try:
                     destination = source
                 except:
-                    try:
-                        destination = source.value
-                    except:
-                        try:
-                            destination(source.value, False)
-                        except:
-                            destination(source, False)
+                    destination = source.value

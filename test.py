@@ -22,9 +22,16 @@ from assembler import *
 # print("ebx\t", ebx.get_bh())
 
 st = """
-mov al, 6
-mov ax, 2
-mov ah, 4
+mov ah, 1
+add al, 1
+add eax, 16
 """
-
-execute(st)
+eax = Eax()
+print(type(eax.set_ah))
+print(execute(st))
+# a =32*"0"
+# for i in a:
+#     print(i, end="\t")
+# print()
+# for i in range(32):
+#     print(i, end='\t')

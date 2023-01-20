@@ -53,11 +53,11 @@ def get_instructions(str_code):
             #  check destination
             if operation[1][:-1].strip() in eax_list:
                 destination = "eax"
-            if operation[1][:-1].strip() in ax_list:
+            elif operation[1][:-1].strip() in ax_list:
                 destination = "ax"
-            if operation[1][:-1].strip() in al_list:
+            elif operation[1][:-1].strip() in al_list:
                 destination = "al"
-            if operation[1][:-1].strip() in ah_list:
+            elif operation[1][:-1].strip() in ah_list:
                 destination = "ah"
 
             elif operation[1][:-1].strip() in ebx_list:
@@ -132,6 +132,7 @@ def get_instructions(str_code):
 
 def execute(raw_code):
     instructions = get_instructions(raw_code)
+    print(instructions)
     eax = Eax()
     ebx = Ebx()
     ecx = Ecx()

@@ -102,6 +102,9 @@
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>jkjkj</string>
+      </property>
       <property name="documentTitle">
        <string/>
       </property>
@@ -134,6 +137,9 @@ p, li { white-space: pre-wrap; }
         <width>261</width>
         <height>40</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>hello</string>
       </property>
      </widget>
      <widget class="QTextBrowser" name="edx_value">

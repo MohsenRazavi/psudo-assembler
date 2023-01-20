@@ -46,7 +46,7 @@ class Eax(Register):
             return self.get_al()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(al_val)
-        for i in range(25, 32):
+        for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
@@ -55,8 +55,8 @@ class Eax(Register):
             return self.get_ah()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ah_val)
-        for i in range(17, 25):
-            val[i] = new_sub_val[i - 17]
+        for i in range(16, 24):
+            val[i] = new_sub_val[i - 16]
         self.value = int(''.join(val), 2)
 
 
@@ -89,7 +89,7 @@ class Ebx(Register):
             return self.get_bl()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bl_val)
-        for i in range(25, 32):
+        for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
@@ -98,8 +98,8 @@ class Ebx(Register):
             return self.get_bh()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bh_val)
-        for i in range(17, 25):
-            val[i] = new_sub_val[i - 17]
+        for i in range(16, 24):
+            val[i] = new_sub_val[i - 16]
         self.value = int(''.join(val), 2)
 
 
@@ -132,7 +132,7 @@ class Ecx(Register):
             return self.get_cl()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(cl_val)
-        for i in range(25, 32):
+        for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
@@ -141,8 +141,8 @@ class Ecx(Register):
             return self.get_ch()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ch_val)
-        for i in range(17, 25):
-            val[i] = new_sub_val[i - 17]
+        for i in range(16, 24):
+            val[i] = new_sub_val[i - 16]
         self.value = int(''.join(val), 2)
 
 
@@ -175,7 +175,7 @@ class Edx(Register):
             return self.get_dl()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dl_val)
-        for i in range(25, 32):
+        for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
@@ -184,6 +184,6 @@ class Edx(Register):
             return self.get_dh()
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dh_val)
-        for i in range(17, 25):
-            val[i] = new_sub_val[i - 17]
+        for i in range(16, 24):
+            val[i] = new_sub_val[i - 16]
         self.value = int(''.join(val), 2)
