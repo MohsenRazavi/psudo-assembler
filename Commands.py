@@ -123,11 +123,6 @@ class Mov(Command):
         super(Mov, self).__init__()
 
     def res(self, destination, source):
-        if type(destination) != Register:
-            try:
-                destination(source.value, False)
-            except:
-                destination(source, False)
         try:
             destination.value = source.value
         except:
@@ -137,4 +132,10 @@ class Mov(Command):
                 try:
                     destination = source
                 except:
-                    destination = source.value
+                    try:
+                        destination = source.value
+                    except:
+                        try:
+                            destination(source.value, False)
+                        except:
+                            destination(source, False)

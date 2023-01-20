@@ -36,6 +36,8 @@ def get_instructions(str_code):
     source = ""
     for opr in list_code:
         if opr:
+            if opr[0] == ";":
+                continue
             operation = opr.split(" ")
             #  check command
             if operation[0].strip() in mov_list:
@@ -171,10 +173,21 @@ def execute(raw_code):
         "mov": mov
     }
 
+    output = {
+        "eax": 0,
+        "ebx": 0,
+        "ecx": 0,
+        "edx": 0
+    }
     for instruction in instructions:
         try:
             commands[instruction[0]].res(registers[instruction[1]], registers[instruction[2]])
         except:
-                commands[instruction[0]].res(registers[instruction[1]], instruction[2])
+            commands[instruction[0]].res(registers[instruction[1]], instruction[2])
 
-        print('{0:032b}'.format(eax.value))
+    output["eax"] = '{0:032b}'.format(eax.value)
+    output["ebx"] = '{0:032b}'.format(ebx.value)
+    output["ecx"] = '{0:032b}'.format(ecx.value)
+    output["edx"] = '{0:032b}'.format(edx.value)
+
+    return output
