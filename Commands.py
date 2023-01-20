@@ -1,3 +1,6 @@
+from Registers import *
+
+
 class Command:
     def __init__(self, *args):
         pass
@@ -16,6 +19,15 @@ class And(Command):
         super(And, self).__init__()
 
     def res(self, destination, source):
+        if type(destination) != Register:
+            try:
+                dest_value = destination(0, True)
+                dest_value &= source.value
+                destination(dest_value, False)
+            except:
+                destination(0, True)
+                dest_value &= source
+                destination(dest_value, False)
         try:
             destination.value &= source.value
         except:
@@ -33,6 +45,15 @@ class Or(Command):
         super(Or, self).__init__()
 
     def res(self, destination, source):
+        if type(destination) != Register:
+            try:
+                dest_value = destination(0, True)
+                dest_value |= source.value
+                destination(dest_value, False)
+            except:
+                destination(0, True)
+                dest_value |= source
+                destination(dest_value, False)
         try:
             destination.value |= source.value
         except:
@@ -50,6 +71,15 @@ class Sub(Command):
         super(Sub, self).__init__()
 
     def res(self, destination, source):
+        if type(destination) != Register:
+            try:
+                dest_value = destination(0, True)
+                dest_value -= source.value
+                destination(dest_value, False)
+            except:
+                destination(0, True)
+                dest_value -= source
+                destination(dest_value, False)
         try:
             destination.value -= source.value
         except:
@@ -67,6 +97,15 @@ class Add(Command):
         super(Add, self).__init__()
 
     def res(self, destination, source):
+        if type(destination) != Register:
+            try:
+                dest_value = destination(0, True)
+                dest_value += source.value
+                destination(dest_value, False)
+            except:
+                destination(0, True)
+                dest_value += source
+                destination(dest_value, False)
         try:
             destination.value += source.value
         except:
@@ -84,6 +123,11 @@ class Mov(Command):
         super(Mov, self).__init__()
 
     def res(self, destination, source):
+        if type(destination) != Register:
+            try:
+                destination(source.value, False)
+            except:
+                destination(source, False)
         try:
             destination.value = source.value
         except:
