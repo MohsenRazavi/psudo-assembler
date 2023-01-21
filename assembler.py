@@ -3,31 +3,31 @@ from Registers import *
 
 
 def get_instructions(str_code):
-    mov_list = ["mov", "Mov", "mOv", "moV"]
-    add_list = ["add"]
-    sub_list = ["sub"]
-    and_list = ["and"]
-    or_list = ["or"]
+    mov_list = ["mov", "Mov", "MOV"]
+    add_list = ["add", "Add", "ADD"]
+    sub_list = ["sub", "Sub", "SUB"]
+    and_list = ["and", "And", "AND"]
+    or_list = ["or", "Or", "OR"]
 
-    eax_list = ["eax", ]
-    ax_list = ["ax", ]
-    al_list = ["al", ]
-    ah_list = ["ah", ]
+    eax_list = ["eax", "Eax", "EAX"]
+    ax_list = ["ax", "Ax", "AX"]
+    al_list = ["al", "Al", "AL"]
+    ah_list = ["ah", "Ah", "AH"]
 
-    ebx_list = ["ebx", ]
-    bx_list = ["bx", ]
-    bl_list = ["bl", ]
-    bh_list = ["bh"]
+    ebx_list = ["ebx", "Ebx", "EBX"]
+    bx_list = ["bx", "Bx", "BX"]
+    bl_list = ["bl", "Bl", "BL"]
+    bh_list = ["bh", "Bh", "BH"]
 
-    ecx_list = ["ecx", ]
-    cx_list = ["cx", ]
-    cl_list = ["cl", ]
-    ch_list = ["ch"]
+    ecx_list = ["ecx", "Ecx", "ECX"]
+    cx_list = ["cx", "Cx", "CX"]
+    cl_list = ["cl", "Cl", "CL"]
+    ch_list = ["ch", "Ch", "Ch"]
 
-    edx_list = ["edx", ]
-    dx_list = ["dx", ]
-    dl_list = ["dl"]
-    dh_list = ["dh"]
+    edx_list = ["edx", "Edx", "EDX"]
+    dx_list = ["dx", "Dx", "DX"]
+    dl_list = ["dl", "Dl", "DL"]
+    dh_list = ["dh", "Dh", "DH"]
 
     operations = []
     list_code = str_code.split("\n")
@@ -125,7 +125,7 @@ def get_instructions(str_code):
                 elif operation[2].strip() in dh_list:
                     source = "dh"
                 else:
-                    try :
+                    try:
                         source = int(operation[2].strip())
                     except:
                         if operation[2][-1] == "d":
