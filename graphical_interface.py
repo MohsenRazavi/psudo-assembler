@@ -24,6 +24,7 @@ class Ui_MainWindow(object):
     ebx = ""
     ecx = ""
     edx = ""
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1460, 746)
@@ -209,11 +210,9 @@ class Ui_MainWindow(object):
 
     # my codes :
 
-
-
     def animate_progress_bar(self):
         self.progress.setValue(0)
-        while self.progress.value()!=100:
+        while self.progress.value() != 100:
             app.processEvents()
             time.sleep(.01)
             val = self.progress.value()
@@ -229,6 +228,15 @@ class Ui_MainWindow(object):
         self.mainEditor.setPlainText(f"; Reading from {file_name} ({file_dir})")
         self.mainEditor.appendPlainText(extracted_code)
 
+    def show_error_box(self, error_message):
+        error = QtWidgets.QMessageBox()
+        error.setIcon(QtWidgets.QMessageBox.Critical)
+        error.setWindowTitle("Error while running code")
+        error.setText(error_message)
+        error.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+        error.exec_()
+
     def run(self):
 
         self.animate_progress_bar()
@@ -236,18 +244,21 @@ class Ui_MainWindow(object):
         raw_code = str(self.mainEditor.toPlainText())
         print(raw_code)
         final_values = execute(raw_code)
-        self.eax_value.setText(str(final_values["eax"]))
-        self.ebx_value.setText(str(final_values["ebx"]))
-        self.ecx_value.setText(str(final_values["ecx"]))
-        self.edx_value.setText(str(final_values["edx"]))
-        self.eax = str(int(final_values["eax"], 2))
-        self.ebx = str(int(final_values["ebx"], 2))
-        self.ecx = str(int(final_values["ecx"], 2))
-        self.edx = str(int(final_values["edx"], 2))
-        # self.carry_flag_value.setText(final_values["carry_flag"])
-        # self.overflow_flag_value.setText(final_values["overflow_flag"])
-        # self.zero_flag_value.setText(final_values["zero_flag"])
-        # self.negative_flag_value.setText(final_values["negative_flag"])
+        if final_values["error"]:
+            self.show_error_box(final_values["error"])
+        else:
+            self.eax_value.setText(str(final_values["eax"]))
+            self.ebx_value.setText(str(final_values["ebx"]))
+            self.ecx_value.setText(str(final_values["ecx"]))
+            self.edx_value.setText(str(final_values["edx"]))
+            self.eax = str(int(final_values["eax"], 2))
+            self.ebx = str(int(final_values["ebx"], 2))
+            self.ecx = str(int(final_values["ecx"], 2))
+            self.edx = str(int(final_values["edx"], 2))
+            # self.carry_flag_value.setText(final_values["carry_flag"])
+            # self.overflow_flag_value.setText(final_values["overflow_flag"])
+            # self.zero_flag_value.setText(final_values["zero_flag"])
+            # self.negative_flag_value.setText(final_values["negative_flag"])
 
 
 if __name__ == "__main__":
