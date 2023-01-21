@@ -125,8 +125,17 @@ def get_instructions(str_code):
                 elif operation[2].strip() in dh_list:
                     source = "dh"
                 else:
-                    source = int(operation[2].strip())
-
+                    try :
+                        source = int(operation[2].strip())
+                    except:
+                        if operation[2][-1] == "d":
+                            source = int(operation[2][:-1], 10)
+                        elif operation[2][-1] == "b":
+                            source = int(operation[2][:-1], 2)
+                        elif operation[2][-1] == "h":
+                            source = int(operation[2][:-1], 16)
+                        elif operation[2][-1] == "o":
+                            source = int(operation[2][:-1], 8)
                 operations.append([command, destination, source])
             except:
                 return []

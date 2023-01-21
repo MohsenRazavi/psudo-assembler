@@ -22,8 +22,10 @@ from assembler import *
 # print("ebx\t", ebx.get_bh())
 
 st = """
-mov eax, 5
-sub eax, 5
+mov eax, 011b
+mov ebx, 011h
+mov ecx, 011o
+mov edx, 011d
 
 """
 eax = Eax()

@@ -206,7 +206,6 @@ class Ui_MainWindow(object):
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.code_tab), _translate("MainWindow", "Code"))
 
     # my codes :
-
     def animate_progress_bar(self):
         self.progress.setValue(0)
         while self.progress.value() != 100:
