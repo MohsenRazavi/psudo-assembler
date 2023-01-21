@@ -1,9 +1,13 @@
 class Register:
     bytes = 0
-    max_size = 2 ** (8 * bytes)
+    max_size = 0
+
+    def set_max_size(self):
+        self.max_size = 2 ** (8 * self.bytes) - 1
 
     def __init__(self):
         self.value = 0
+        self.set_max_size()
 
     def set_value(self, val):
         if val > self.max_size:
@@ -16,7 +20,9 @@ class Register:
 
 
 class Eax(Register):
-    bytes = 4
+    def __init__(self):
+        self.bytes = 4
+        super().__init__()
 
     def get_ax(self):
         val = '{0:032b}'.format(self.value)
@@ -34,7 +40,7 @@ class Eax(Register):
         if get_value:
             return self.get_ax()
         if get_size:
-            return 2**16
+            return 2**16-1
 
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(ax_val, get_size=False)
@@ -47,7 +53,7 @@ class Eax(Register):
         if get_value:
             return self.get_al()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(al_val)
         for i in range(24, 32):
@@ -58,7 +64,7 @@ class Eax(Register):
         if get_value:
             return self.get_ah()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ah_val)
         for i in range(16, 24):
@@ -67,7 +73,9 @@ class Eax(Register):
 
 
 class Ebx(Register):
-    bytes = 4
+    def __init__(self):
+        self.bytes = 4
+        super().__init__()
 
     def get_bx(self):
         val = '{0:032b}'.format(self.value)
@@ -85,7 +93,7 @@ class Ebx(Register):
         if get_value:
             return self.get_bx()
         if get_size:
-            return 2**16
+            return 2**16-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(bx_val)
         for i in range(16, 32):
@@ -96,7 +104,7 @@ class Ebx(Register):
         if get_value:
             return self.get_bl()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bl_val)
         for i in range(24, 32):
@@ -107,7 +115,7 @@ class Ebx(Register):
         if get_value:
             return self.get_bh()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bh_val)
         for i in range(16, 24):
@@ -116,7 +124,9 @@ class Ebx(Register):
 
 
 class Ecx(Register):
-    bytes = 4
+    def __init__(self):
+        self.bytes = 4
+        super().__init__()
 
     def get_cx(self):
         val = '{0:032b}'.format(self.value)
@@ -134,7 +144,7 @@ class Ecx(Register):
         if get_value:
             return self.get_cx()
         if get_size:
-            return 2**16
+            return 2**16-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(cx_val)
         for i in range(16, 32):
@@ -145,7 +155,7 @@ class Ecx(Register):
         if get_value:
             return self.get_cl()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(cl_val)
         for i in range(24, 32):
@@ -156,7 +166,7 @@ class Ecx(Register):
         if get_value:
             return self.get_ch()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ch_val)
         for i in range(16, 24):
@@ -165,7 +175,9 @@ class Ecx(Register):
 
 
 class Edx(Register):
-    bytes = 4
+    def __init__(self):
+        self.bytes = 4
+        super().__init__()
 
     def get_dx(self):
         val = '{0:032b}'.format(self.value)
@@ -183,7 +195,7 @@ class Edx(Register):
         if get_value:
             return self.get_dx()
         if get_size:
-            return 2**16
+            return 2**16-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(dx_val)
         for i in range(16, 32):
@@ -194,7 +206,7 @@ class Edx(Register):
         if get_value:
             return self.get_dl()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dl_val)
         for i in range(24, 32):
@@ -205,7 +217,7 @@ class Edx(Register):
         if get_value:
             return self.get_dh()
         if get_size:
-            return 2**8
+            return 2**8-1
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dh_val)
         for i in range(16, 24):

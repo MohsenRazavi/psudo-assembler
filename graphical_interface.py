@@ -22,6 +22,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowTitle("Psudo Assembler")
         MainWindow.resize(1460, 746)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -158,7 +159,6 @@ class Ui_MainWindow(object):
         self.carry_flag_value.setObjectName("carry_flag_value")
         self.carry_flag_value.setFontPointSize(15)
 
-
         self.progress = QtWidgets.QProgressBar(self.code_tab)
         self.progress.setGeometry(QtCore.QRect(0, 670, 1451, 23))
         self.progress.setProperty("value", 0)
@@ -193,14 +193,15 @@ class Ui_MainWindow(object):
                                           "p, li { white-space: pre-wrap; }\n"
                                           "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+
         self.eax_label.setText(_translate("MainWindow", "eax"))
         self.ebx_label.setText(_translate("MainWindow", "ebx"))
         self.ecx_label.setText(_translate("MainWindow", "ecx"))
         self.edx_label.setText(_translate("MainWindow", "edx"))
         self.read_from_file_button.setText(_translate("MainWindow", "Read from .txt"))
-        self.zero_flag_label.setText(_translate("MainWindow", "Zero Flag"))
-        self.overflow_flag_label.setText(_translate("MainWindow", "Overflow Flag"))
-        self.negative_flag_label.setText(_translate("MainWindow", "Negative Flag"))
+        self.zero_flag_label.setText(_translate("MainWindow", "Overflow Flag"))
+        self.overflow_flag_label.setText(_translate("MainWindow", "Zero Flag"))  # these two are reverse
+        self.negative_flag_label.setText(_translate("MainWindow", "Negative Flag"))  # these two are reverse
         self.carry_flag_label.setText(_translate("MainWindow", "Carry Flag"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.code_tab), _translate("MainWindow", "Code"))
 

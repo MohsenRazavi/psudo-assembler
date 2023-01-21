@@ -23,11 +23,11 @@ from assembler import *
 
 st = """
 mov eax, 5
-mov ebx, 4
+sub eax, 5
 
-add al, bl
 """
 eax = Eax()
+# print(eax.max_size)
 # print(isinstance(eax.set_ah, classmethod))
 print(execute(st))
 
