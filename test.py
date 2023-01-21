@@ -22,12 +22,14 @@ from assembler import *
 # print("ebx\t", ebx.get_bh())
 
 st = """
-mov ah, 1
-add al, 1
-add eax, 16
+mov eax, 1024
+mov ebx, 4
+
+add eax, bl
 """
 eax = Eax()
-print(type(eax.set_ah))
+# FIXME compare types in commands
+print(isinstance(eax.set_ah, classmethod))
 print(execute(st))
 # a =32*"0"
 # for i in a:

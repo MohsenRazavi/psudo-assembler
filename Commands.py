@@ -30,6 +30,14 @@ class And(Command):
                 dest_value &= source
                 destination(dest_value, False)
                 return
+        if not isinstance(source, Register) and not isinstance(source, int):
+            try:
+                destination.value &= source(0, True)
+                return
+            except:
+
+                destination &= source(0, True)
+                return
         try:
             destination.value &= source.value
         except:
@@ -57,6 +65,14 @@ class Or(Command):
                 destination(0, True)
                 dest_value |= source
                 destination(dest_value, False)
+                return
+        if not isinstance(source, Register) and not isinstance(source, int):
+            try:
+                destination.value |= source(0, True)
+                return
+            except:
+
+                destination |= source(0, True)
                 return
         try:
             destination.value |= source.value
@@ -86,6 +102,14 @@ class Sub(Command):
                 dest_value -= source
                 destination(dest_value, False)
                 return
+        if not isinstance(source, Register) and not isinstance(source, int):
+            try:
+                destination.value -= source(0, True)
+                return
+            except:
+
+                destination -= source(0, True)
+                return
         try:
             destination.value -= source.value
         except:
@@ -114,6 +138,15 @@ class Add(Command):
                 dest_value += source
                 destination(dest_value, False)
                 return
+
+        if not isinstance(source, Register) and not isinstance(source, int):
+            try:
+                destination.value += source(0, True)
+                return
+            except:
+
+                destination += source(0, True)
+                return
         try:
             destination.value += source.value
         except:
@@ -137,6 +170,14 @@ class Mov(Command):
                 return
             except:
                 destination(source.value, False)
+                return
+        if not isinstance(source, Register) and not isinstance(source, int):
+            try:
+                destination.value = source(0, True)
+                return
+            except:
+
+                destination = source(0, True)
                 return
         try:
             destination.value = source.value
