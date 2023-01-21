@@ -20,11 +20,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    eax = ""
-    ebx = ""
-    ecx = ""
-    edx = ""
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1460, 746)
@@ -66,20 +61,19 @@ class Ui_MainWindow(object):
         self.eax_value.setDocumentTitle("")
         self.eax_value.setPlaceholderText("")
         self.eax_value.setObjectName("eax_value")
-        self.eax_value.setToolTip(self.eax)
         self.ebx_value = QtWidgets.QTextBrowser(self.code_tab)
         self.ebx_value.setGeometry(QtCore.QRect(310, 610, 261, 40))
         self.ebx_value.setObjectName("ebx_value")
-        self.eax_value.setToolTip(self.ebx)
+
         self.ecx_value = QtWidgets.QTextBrowser(self.code_tab)
         self.ecx_value.setGeometry(QtCore.QRect(660, 540, 261, 40))
         self.ecx_value.setObjectName("ecx_value")
-        self.eax_value.setToolTip(self.ecx)
+
         self.edx_value = QtWidgets.QTextBrowser(self.code_tab)
         self.edx_value.setGeometry(QtCore.QRect(660, 610, 261, 40))
         self.edx_value.setMarkdown("")
         self.edx_value.setObjectName("edx_value")
-        self.eax_value.setToolTip(self.edx)
+
         self.eax_label = QtWidgets.QLabel(self.code_tab)
         self.eax_label.setGeometry(QtCore.QRect(260, 550, 55, 16))
         font = QtGui.QFont()
@@ -179,12 +173,7 @@ class Ui_MainWindow(object):
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.help_tab), _translate("MainWindow", "Help"))
         self.mainEditor.setPlaceholderText(_translate("MainWindow", "your code ..."))
         self.run_button.setText(_translate("MainWindow", "Run"))
-        # if QT_CONFIG(tooltip)
-        self.eax_value.setToolTip(QCoreApplication.translate("MainWindow", self.eax, None))
-        self.eax_value.setToolTip(QCoreApplication.translate("MainWindow", self.ebx, None))
-        self.eax_value.setToolTip(QCoreApplication.translate("MainWindow", self.ecx, None))
-        self.eax_value.setToolTip(QCoreApplication.translate("MainWindow", self.edx, None))
-        # endif // QT_CONFIG(tooltip)
+
         self.eax_value.setHtml(_translate("MainWindow",
                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -240,21 +229,25 @@ class Ui_MainWindow(object):
     def run(self):
 
         self.animate_progress_bar()
-        # app.processEvents()
+        app.processEvents()
         raw_code = str(self.mainEditor.toPlainText())
         print(raw_code)
         final_values = execute(raw_code)
-        if final_values["error"]:
+        if "error" in list(final_values.keys()):
             self.show_error_box(final_values["error"])
         else:
             self.eax_value.setText(str(final_values["eax"]))
+            self.eax_value.setToolTip(str(int(final_values["eax"], 2)))
+
             self.ebx_value.setText(str(final_values["ebx"]))
+            self.ebx_value.setToolTip(str(int(final_values["ebx"], 2)))
+
             self.ecx_value.setText(str(final_values["ecx"]))
+            self.ecx_value.setToolTip(str(int(final_values["ecx"], 2)))
+
             self.edx_value.setText(str(final_values["edx"]))
-            self.eax = str(int(final_values["eax"], 2))
-            self.ebx = str(int(final_values["ebx"], 2))
-            self.ecx = str(int(final_values["ecx"], 2))
-            self.edx = str(int(final_values["edx"], 2))
+            self.edx_value.setToolTip(str(int(final_values["edx"], 2)))
+
             # self.carry_flag_value.setText(final_values["carry_flag"])
             # self.overflow_flag_value.setText(final_values["overflow_flag"])
             # self.zero_flag_value.setText(final_values["zero_flag"])
@@ -264,9 +257,9 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
 
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+app = QtWidgets.QApplication(sys.argv)
+MainWindow = QtWidgets.QMainWindow()
+ui = Ui_MainWindow()
+ui.setupUi(MainWindow)
+MainWindow.show()
+sys.exit(app.exec_())

@@ -19,7 +19,13 @@ class And(Command):
         super(And, self).__init__()
 
     def res(self, destination, source):
-        if not isinstance(destination, Register):
+        if not isinstance(destination, Register) and not isinstance(source, Register):
+            source_val = source(0, True)
+            dest_val = destination(0, True)
+            dest_val &= source_val
+            destination(dest_val, False)
+            return
+        elif not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value &= source.value
@@ -30,7 +36,7 @@ class And(Command):
                 dest_value &= source
                 destination(dest_value, False)
                 return
-        if not isinstance(source, Register) and not isinstance(source, int):
+        elif not isinstance(source, Register) and not isinstance(source, int):
             try:
                 destination.value &= source(0, True)
                 return
@@ -55,7 +61,13 @@ class Or(Command):
         super(Or, self).__init__()
 
     def res(self, destination, source):
-        if not isinstance(destination, Register):
+        if not isinstance(destination, Register) and not isinstance(source, Register):
+            source_val = source(0, True)
+            dest_val = destination(0, True)
+            dest_val |= source_val
+            destination(dest_val, False)
+            return
+        elif not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value |= source.value
@@ -66,12 +78,11 @@ class Or(Command):
                 dest_value |= source
                 destination(dest_value, False)
                 return
-        if not isinstance(source, Register) and not isinstance(source, int):
+        elif not isinstance(source, Register) and not isinstance(source, int):
             try:
                 destination.value |= source(0, True)
                 return
             except:
-
                 destination |= source(0, True)
                 return
         try:
@@ -91,7 +102,13 @@ class Sub(Command):
         super(Sub, self).__init__()
 
     def res(self, destination, source):
-        if not isinstance(destination, Register):
+        if not isinstance(destination, Register) and not isinstance(source, Register):
+            source_val = source(0, True)
+            dest_val = destination(0, True)
+            dest_val -= source_val
+            destination(dest_val, False)
+            return
+        elif not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value -= source.value
@@ -102,12 +119,11 @@ class Sub(Command):
                 dest_value -= source
                 destination(dest_value, False)
                 return
-        if not isinstance(source, Register) and not isinstance(source, int):
+        elif not isinstance(source, Register) and not isinstance(source, int):
             try:
                 destination.value -= source(0, True)
                 return
             except:
-
                 destination -= source(0, True)
                 return
         try:
@@ -127,7 +143,13 @@ class Add(Command):
         super(Add, self).__init__()
 
     def res(self, destination, source):
-        if not isinstance(destination, Register):
+        if not isinstance(destination, Register) and not isinstance(source, Register):
+            source_val = source(0, True)
+            dest_val = destination(0, True)
+            dest_val += source_val
+            destination(dest_val, False)
+            return
+        elif not isinstance(destination, Register):
             try:
                 dest_value = destination(0, True)
                 dest_value += source.value
@@ -139,7 +161,7 @@ class Add(Command):
                 destination(dest_value, False)
                 return
 
-        if not isinstance(source, Register) and not isinstance(source, int):
+        elif not isinstance(source, Register) and not isinstance(source, int):
             try:
                 destination.value += source(0, True)
                 return
@@ -147,6 +169,7 @@ class Add(Command):
 
                 destination += source(0, True)
                 return
+
         try:
             destination.value += source.value
         except:
@@ -164,14 +187,18 @@ class Mov(Command):
         super(Mov, self).__init__()
 
     def res(self, destination, source):
-        if not isinstance(destination, Register):
+        if not isinstance(destination, Register) and not isinstance(source, Register):
+            source_val = source(0, True)
+            destination(source_val, False)
+            return
+        elif not isinstance(destination, Register):
             try:
                 destination(source, False)
                 return
             except:
                 destination(source.value, False)
                 return
-        if not isinstance(source, Register) and not isinstance(source, int):
+        elif not isinstance(source, Register) and not isinstance(source, int):
             try:
                 destination.value = source(0, True)
                 return
@@ -179,6 +206,7 @@ class Mov(Command):
 
                 destination = source(0, True)
                 return
+
         try:
             destination.value = source.value
         except:

@@ -22,10 +22,10 @@ from assembler import *
 # print("ebx\t", ebx.get_bh())
 
 st = """
-mov eax, 1024
+mov eax, 5
 mov ebx, 4
 
-add eax, bl
+add al, bl
 """
 eax = Eax()
 # FIXME compare types in commands
