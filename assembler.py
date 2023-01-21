@@ -182,6 +182,10 @@ def execute(raw_code):
         "ebx": 0,
         "ecx": 0,
         "edx": 0,
+        "carry_flag": 0,
+        "overflow_flag": 0,
+        "zero_flag": 0,
+        "negative_flag": 0,
     }
     if instructions:
         for instruction in instructions:

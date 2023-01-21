@@ -122,6 +122,7 @@ class Ui_MainWindow(object):
         self.negative_flag_value = QtWidgets.QTextBrowser(self.code_tab)
         self.negative_flag_value.setGeometry(QtCore.QRect(1320, 540, 101, 40))
         self.negative_flag_value.setObjectName("negative_flag_value")
+        self.negative_flag_value.setFontPointSize(15)
         self.overflow_flag_label = QtWidgets.QLabel(self.code_tab)
         self.overflow_flag_label.setGeometry(QtCore.QRect(960, 610, 111, 31))
         font = QtGui.QFont()
@@ -132,9 +133,11 @@ class Ui_MainWindow(object):
         self.zero_flag_value = QtWidgets.QTextBrowser(self.code_tab)
         self.zero_flag_value.setGeometry(QtCore.QRect(1070, 610, 101, 40))
         self.zero_flag_value.setObjectName("zero_flag_value")
+        self.zero_flag_value.setFontPointSize(15)
         self.overflow_flag_value = QtWidgets.QTextBrowser(self.code_tab)
         self.overflow_flag_value.setGeometry(QtCore.QRect(1320, 610, 101, 40))
         self.overflow_flag_value.setObjectName("overflow_flag_value")
+        self.overflow_flag_value.setFontPointSize(15)
         self.negative_flag_label = QtWidgets.QLabel(self.code_tab)
         self.negative_flag_label.setGeometry(QtCore.QRect(1210, 540, 111, 31))
         font = QtGui.QFont()
@@ -149,9 +152,13 @@ class Ui_MainWindow(object):
         self.carry_flag_label.setFont(font)
         self.carry_flag_label.setAlignment(QtCore.Qt.AlignCenter)
         self.carry_flag_label.setObjectName("carry_flag_label")
+
         self.carry_flag_value = QtWidgets.QTextBrowser(self.code_tab)
         self.carry_flag_value.setGeometry(QtCore.QRect(1070, 540, 101, 40))
         self.carry_flag_value.setObjectName("carry_flag_value")
+        self.carry_flag_value.setFontPointSize(15)
+
+
         self.progress = QtWidgets.QProgressBar(self.code_tab)
         self.progress.setGeometry(QtCore.QRect(0, 670, 1451, 23))
         self.progress.setProperty("value", 0)
@@ -231,27 +238,27 @@ class Ui_MainWindow(object):
         self.animate_progress_bar()
         app.processEvents()
         raw_code = str(self.mainEditor.toPlainText())
-        print(raw_code)
         final_values = execute(raw_code)
+        print(final_values)
         if "error" in list(final_values.keys()):
             self.show_error_box(final_values["error"])
-        else:
-            self.eax_value.setText(str(final_values["eax"]))
-            self.eax_value.setToolTip(str(int(final_values["eax"], 2)))
 
-            self.ebx_value.setText(str(final_values["ebx"]))
-            self.ebx_value.setToolTip(str(int(final_values["ebx"], 2)))
+        self.eax_value.setText(str(final_values["eax"]))
+        self.eax_value.setToolTip(str(int(final_values["eax"], 2)))
 
-            self.ecx_value.setText(str(final_values["ecx"]))
-            self.ecx_value.setToolTip(str(int(final_values["ecx"], 2)))
+        self.ebx_value.setText(str(final_values["ebx"]))
+        self.ebx_value.setToolTip(str(int(final_values["ebx"], 2)))
 
-            self.edx_value.setText(str(final_values["edx"]))
-            self.edx_value.setToolTip(str(int(final_values["edx"], 2)))
+        self.ecx_value.setText(str(final_values["ecx"]))
+        self.ecx_value.setToolTip(str(int(final_values["ecx"], 2)))
 
-            # self.carry_flag_value.setText(final_values["carry_flag"])
-            # self.overflow_flag_value.setText(final_values["overflow_flag"])
-            # self.zero_flag_value.setText(final_values["zero_flag"])
-            # self.negative_flag_value.setText(final_values["negative_flag"])
+        self.edx_value.setText(str(final_values["edx"]))
+        self.edx_value.setToolTip(str(int(final_values["edx"], 2)))
+
+        self.carry_flag_value.setText(str(final_values["carry_flag"]))
+        self.overflow_flag_value.setText(str(final_values["overflow_flag"]))
+        self.zero_flag_value.setText(str(final_values["zero_flag"]))
+        self.negative_flag_value.setText(str(final_values["negative_flag"]))
 
 
 if __name__ == "__main__":
