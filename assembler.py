@@ -191,9 +191,9 @@ def execute(raw_code):
         for instruction in instructions:
 
             try:
-                commands[instruction[0]].res(registers[instruction[1]], registers[instruction[2]])
+                commands[instruction[0]].res(registers[instruction[1]], registers[instruction[2]], flags=output)
             except:
-                commands[instruction[0]].res(registers[instruction[1]], instruction[2])
+                commands[instruction[0]].res(registers[instruction[1]], instruction[2], flags=output)
     else:
         output["error"] = "no assembly code found !"
 

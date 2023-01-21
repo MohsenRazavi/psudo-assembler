@@ -28,9 +28,21 @@ mov ebx, 4
 add al, bl
 """
 eax = Eax()
-# FIXME compare types in commands
-print(isinstance(eax.set_ah, classmethod))
+# print(isinstance(eax.set_ah, classmethod))
 print(execute(st))
+
+# class a:
+#     def __init__(self):
+#         pass
+#     def show(self, c):
+#         print(c)
+#
+# class b(a):
+#     def __init__(self):
+#         super(b, self).__init__()
+#     def show(self, c):
+#         super(b, self).show()
+
 # a =32*"0"
 # for i in a:
 #     print(i, end="\t")

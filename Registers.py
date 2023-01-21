@@ -30,29 +30,35 @@ class Eax(Register):
         val = '{0:032b}'.format(self.value)
         return int(val[17:25], 2)
 
-    def set_ax(self, ax_val, get_vlue):
-        if get_vlue:
+    def set_ax(self, ax_val, get_value=False, get_size=False):
+        if get_value:
             return self.get_ax()
+        if get_size:
+            return 2**16
 
         val = list('{0:032b}'.format(self.value))
-        new_sub_val = '{0:016b}'.format(ax_val)
+        new_sub_val = '{0:016b}'.format(ax_val, get_size=False)
         for i in range(16, 32):
             val[i] = new_sub_val[i-16]
         self.value = int(''.join(val), 2)
         return
 
-    def set_al(self, al_val, get_vlue):
-        if get_vlue:
+    def set_al(self, al_val, get_value=False, get_size=False):
+        if get_value:
             return self.get_al()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(al_val)
         for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
-    def set_ah(self, ah_val, get_vlue):
-        if get_vlue:
+    def set_ah(self, ah_val, get_value=False, get_size=False):
+        if get_value:
             return self.get_ah()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ah_val)
         for i in range(16, 24):
@@ -75,27 +81,33 @@ class Ebx(Register):
         val = '{0:032b}'.format(self.value)
         return int(val[16:24], 2)
 
-    def set_bx(self, bx_val, get_value):
+    def set_bx(self, bx_val, get_value=False, get_size=False):
         if get_value:
             return self.get_bx()
+        if get_size:
+            return 2**16
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(bx_val)
         for i in range(16, 32):
             val[i] = new_sub_val[i-16]
         self.value = int(''.join(val), 2)
 
-    def set_bl(self, bl_val, get_value):
+    def set_bl(self, bl_val, get_value=False, get_size=False):
         if get_value:
             return self.get_bl()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bl_val)
         for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
-    def set_bh(self, bh_val, get_value):
+    def set_bh(self, bh_val, get_value=False, get_size=False):
         if get_value:
             return self.get_bh()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(bh_val)
         for i in range(16, 24):
@@ -118,27 +130,33 @@ class Ecx(Register):
         val = '{0:032b}'.format(self.value)
         return int(val[16:24], 2)
 
-    def set_cx(self, cx_val, get_value):
+    def set_cx(self, cx_val, get_value=False, get_size=False):
         if get_value:
             return self.get_cx()
+        if get_size:
+            return 2**16
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(cx_val)
         for i in range(16, 32):
             val[i] = new_sub_val[i-16]
         self.value = int(''.join(val), 2)
 
-    def set_cl(self, cl_val, get_value):
+    def set_cl(self, cl_val, get_value=False, get_size=False):
         if get_value:
             return self.get_cl()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(cl_val)
         for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
-    def set_ch(self, ch_val, get_value):
+    def set_ch(self, ch_val, get_value=False, get_size=False):
         if get_value:
             return self.get_ch()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(ch_val)
         for i in range(16, 24):
@@ -161,27 +179,33 @@ class Edx(Register):
         val = '{0:032b}'.format(self.value)
         return int(val[16:24], 2)
 
-    def set_dx(self, dx_val, get_value):
+    def set_dx(self, dx_val, get_value=False, get_size=False):
         if get_value:
             return self.get_dx()
+        if get_size:
+            return 2**16
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:016b}'.format(dx_val)
         for i in range(16, 32):
             val[i] = new_sub_val[i-16]
         self.value = int(''.join(val), 2)
 
-    def set_dl(self, dl_val, get_value):
+    def set_dl(self, dl_val, get_value=False, get_size=False):
         if get_value:
             return self.get_dl()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dl_val)
         for i in range(24, 32):
             val[i] = new_sub_val[i-24]
         self.value = int(''.join(val), 2)
 
-    def set_dh(self, dh_val, get_value):
+    def set_dh(self, dh_val, get_value=False, get_size=False):
         if get_value:
             return self.get_dh()
+        if get_size:
+            return 2**8
         val = list('{0:032b}'.format(self.value))
         new_sub_val = '{0:08b}'.format(dh_val)
         for i in range(16, 24):
