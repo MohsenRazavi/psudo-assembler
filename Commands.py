@@ -14,9 +14,10 @@ class Command:
             destination(ans, get_value=False)
             if src_val > dest_size:
                 flags["carry_flag"] = 1
-            if ans==0:
+                flags["overflow_flag"] = 1
+            if ans == 0:
                 flags["zero_flag"] = 1
-            if ans<0:
+            if ans < 0:
                 flags["negative_flag"] = 1
 
             return flags
@@ -29,9 +30,10 @@ class Command:
                 destination(ans, get_value=False)
                 if source > dest_size:
                     flags["carry_flag"] = 1
-                if ans==0:
+                    flags["overflow_flag"] = 1
+                if ans == 0:
                     flags["zero_flag"] = 1
-                if ans<0:
+                if ans < 0:
                     flags["negative_flag"] = 1
 
                 return flags
@@ -43,9 +45,10 @@ class Command:
                 destination(ans, get_value=False)
                 if source.value > dest_size:
                     flags["carry_flag"] = 1
-                if ans==0:
+                    flags["overflow_flag"] = 1
+                if ans == 0:
                     flags["zero_flag"] = 1
-                if ans<0:
+                if ans < 0:
                     flags["negative_flag"] = 1
 
                 return flags
@@ -58,9 +61,10 @@ class Command:
                 destination.value = ans
                 if source(get_value=True) > dest_size:
                     flags["carry_flag"] = 1
-                if ans==0:
+                    flags["overflow_flag"] = 1
+                if ans == 0:
                     flags["zero_flag"] = 1
-                if ans<0:
+                if ans < 0:
                     flags["negative_flag"] = 1
                 return flags
             except:
@@ -71,9 +75,10 @@ class Command:
                 destination = ans
                 if source(get_value=True) > dest_size:
                     flags["carry_flag"] = 1
-                if ans==0:
+                    flags["overflow_flag"] = 1
+                if ans == 0:
                     flags["zero_flag"] = 1
-                if ans<0:
+                if ans < 0:
                     flags["negative_flag"] = 1
                 return flags
 
@@ -104,9 +109,11 @@ class Command:
 
         if src_val > dest_size:
             flags["carry_flag"] = 1
-        if ans==0:
+            flags["overflow_flag"] = 1
+            flags["overflow_flag"] = 1
+        if ans == 0:
             flags["zero_flag"] = 1
-        if ans<0:
+        if ans < 0:
             flags["negative_flag"] = 1
         return flags
 
@@ -122,6 +129,7 @@ class And(Command):
     def res(self, destination, source, **flags):
         flags = super().res(destination, source, func=self.and_, **flags)
         return flags
+
 
 class Or(Command):
     def __init__(self):
@@ -148,6 +156,7 @@ class Sub(Command):
         flags = super().res(destination, source, func=self.sub, **flags)
         return flags
 
+
 class Add(Command):
     def __init__(self):
         super(Add, self).__init__()
@@ -159,6 +168,7 @@ class Add(Command):
     def res(self, destination, source, **flags):
         flags = super().res(destination, source, func=self.add, **flags)
         return flags
+
 
 class Mov(Command):
     def __init__(self):

@@ -9,8 +9,6 @@
 
 
 import os
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import QFileDialog
 import time
 
@@ -178,7 +176,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.help_text.setPlaceholderText(_translate("MainWindow", "write code !"))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.help_tab), _translate("MainWindow", "Help"))
-        self.mainEditor.setPlaceholderText(_translate("MainWindow", "your code ..."))
+        self.mainEditor.setPlaceholderText(_translate("MainWindow", "Ya Ali, Az Haminja Shorou kon ...  :)\nfaghat mesle adam code bezan"))
         self.run_button.setText(_translate("MainWindow", "Run"))
 
         self.eax_value.setHtml(_translate("MainWindow",
