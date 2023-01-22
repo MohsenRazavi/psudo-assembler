@@ -174,9 +174,165 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.help_text.setPlaceholderText(_translate("MainWindow", "write code !"))
+        self.help_text.setFontPointSize(10)
+        self.help_text.setText("""
+Assembly Language for x86 Processors focuses on programming microprocessors compatible
+with Intel and AMD processors running under 32-bit and 64-bit versions of Microsoft Windows.
+The latest version of Microsoft Macro Assembler (known as MASM) should be used with this
+book. MASM is included with most versions of Microsoft Visual Studio (Pro, Ultimate,
+Express, . . . ). Please check our web site (asmirvine.com) for the latest details about support for
+MASM in Visual Studio. We also include lots of helpful information about how to set up your
+software and get started.
+Some other well-known assemblers for x86 systems running under Microsoft Windows
+include TASM (Turbo Assembler), NASM (Netwide Assembler), and MASM32 (a variant of
+MASM). Two popular Linux-based assemblers are GAS (GNU assembler) and NASM. Of
+these, NASM’s syntax is most similar to that of MASM.
+Assembly language is the oldest programming language, and of all languages, bears the
+closest resemblance to native machine language. It provides direct access to computer hardware, requiring you to understand much about your computer’s architecture and operating
+system.
+Educational Value Why read this book? Perhaps you’re taking a college course whose title is
+similar to one of the following courses that often use our book:
+• Microcomputer Assembly Language
+• Assembly Language Programming
+• Introduction to Computer Architecture
+• Fundamentals of Computer Systems
+• Embedded Systems Programming
+This book will help you learn basic principles about computer architecture, machine language, and low-level programming. You will learn enough assembly language to test your
+knowledge on today’s most widely used microprocessor family. You won’t be learning to program a “toy” computer using a simulated assembler; MASM is an industrial-strength assembler,
+used by practicing professionals. You will learn the architecture of the Intel processor family
+from a programmer’s point of view. 
+If you are planning to be a C or C++ developer, you need to develop an understanding of how
+memory, address, and instructions work at a low level. A lot of programming errors are not easily recognized at the high-level language level. You will often find it necessary to “drill down”
+into your program’s internals to find out why it isn’t working.
+If you doubt the value of low-level programming and studying details of computer software
+and hardware, take note of the following quote from a leading computer scientist, Donald Knuth,
+in discussing his famous book series, The Art of Computer Programming:
+Some people [say] that having machine language, at all, was the great mistake that I made.
+I really don’t think you can write a book for serious computer programmers unless you are
+able to discuss low-level detail.
+What Background Should I Have? Before reading this book, you should have programmed
+in at least one structured high-level language, such as Java, C, Python, or C++. You should know
+how to use IF statements, arrays, and functions to solve programming problems.
+What Are Assemblers and Linkers? An assembler is a utility program that converts source
+code programs from assembly language into machine language. A linker is a utility program that combines individual files created by an assembler into a single executable program. A related utility, called a
+debugger, lets you to step through a program while it’s running and examine registers and memory.
+What Hardware and Software Do I Need? You need a computer that runs a 32-bit or 64-bit
+version of Microsoft Windows, along with one of the recent versions of Microsoft Visual Studio. 
+What Types of Programs Can Be Created Using MASM?
+• 32-Bit Protected Mode: 32-bit protected mode programs run under all 32-bit versions of
+Microsoft Windows. They are usually easier to write and understand than real-mode programs. From now on, we will simply call this 32-bit mode.
+• 64-Bit Mode: 64-bit programs run under all 64-bit versions of Microsoft Windows.
+• 16-Bit Real-Address Mode: 16-bit programs run under 32-bit versions of Windows and on
+embedded systems. Because they are not supported by 64-bit Windows, we will restrict discussions of this mode to Chapters 14 through 17. These chapters are in electronic form, available from the publisher’s web site.
+What Supplements Are Supplied with This Book? The book’s web site (www.asmirvine.com)
+has the following: 
+• Assembly Language Workbook, a collection of tutorials
+• Irvine32, Irvine64, and Irvine16 subroutine libraries for 64-bit, 32-bit, and 16-bit programming, with complete source code
+• Example programs with all source code from the book
+• Corrections to the book
+• Getting Started, a detailed tutorial designed to help you set up Visual Studio to use the
+Microsoft assembler
+• Articles on advanced topics not included in the printed book for lack of space
+• A link to an online discussion forum, where you can get help from other experts who use the book
+What Will I Learn? This book should make you better informed about data representation,
+debugging, programming, and hardware manipulation. Here’s what you will learn:
+• Basic principles of computer architecture as applied to x86 processors 
+• Basic boolean logic and how it applies to programming and computer hardware
+• How x86 processors manage memory, using protected mode and virtual mode
+• How high-level language compilers (such as C++) translate statements from their language
+into assembly language and native machine code
+4 Chapter 1 • Basic Concepts
+• How high-level languages implement arithmetic expressions, loops, and logical structures at
+the machine level
+• Data representation, including signed and unsigned integers, real numbers, and character data
+• How to debug programs at the machine level. The need for this skill is vital when you work in
+languages such as C and C++, which generate native machine code
+• How application programs communicate with the computer’s operating system via interrupt
+handlers and system calls
+• How to interface assembly language code to C++ programs
+• How to create assembly language application programs
+How Does Assembly Language Relate to Machine Language? Machine language is a
+numeric language specifically understood by a computer’s processor (the CPU). All x86 processors
+understand a common machine language. Assembly language consists of statements written with
+short mnemonics such as ADD, MOV, SUB, and CALL. Assembly language has a one-to-one relationship with machine language: Each assembly language instruction corresponds to a
+single machine-language instruction. 
+How Do C++ and Java Relate to Assembly Language? High-level languages such as
+Python, C++, and Java have a one-to-many relationship with assembly language and machine
+language. A single statement in C++, for example, expands into multiple assembly language or
+machine instructions. Most people cannot read raw machine code, so in this book, we examine
+its closest relative, assembly language. For example, the following C++ code carries out two
+arithmetic operations and assigns the result to a variable. Assume X and Y are integers:
+int Y;
+int X = (Y + 4) * 3;
+Following is the equivalent translation to assembly language. The translation requires multiple
+statements because each assembly language statement corresponds to a single machine instruction:
+mov eax,Y ; move Y to the EAX register
+add eax,4 ; add 4 to the EAX register
+mov ebx,3 ; move 3 to the EBX register
+imul ebx ; multiply EAX by EBX
+mov X,eax ; move EAX to X
+(Registers are named storage locations in the CPU that hold intermediate results of operations.)
+The point of this example is not to claim that C++ is superior to assembly language or vice
+versa, but to show their relationship.
+Is Assembly Language Portable? A language whose source programs can be compiled and
+run on a wide variety of computer systems is said to be portable. A C++ program, for example,
+will compile and run on just about any computer, unless it makes specific references to library
+functions that exist under a single operating system. A major feature of the Java language is that
+compiled programs run on nearly any computer system.
+Assembly language is not portable, because it is designed for a specific processor family. There
+are a number of different assembly languages widely used today, each based on a processor family.
+1.1 Welcome to Assembly Language 5
+Some well-known processor families are Motorola 68x00, x86, SUN Sparc, Vax, and IBM-370.
+The instructions in assembly language may directly match the computer’s architecture or they may
+be translated during execution by a program inside the processor known as a microcode interpreter.
+Why Learn Assembly Language? If you’re still not convinced that you should learn assembly
+language, consider the following points:
+• If you study computer engineering, you may likely be asked to write embedded programs.
+They are short programs stored in a small amount of memory in single-purpose devices such
+as telephones, automobile fuel and ignition systems, air-conditioning control systems, security systems, data acquisition instruments, video cards, sound cards, hard drives, modems,
+and printers. Assembly language is an ideal tool for writing embedded programs because of
+its economical use of memory.
+• Real-time applications dealing with simulation and hardware monitoring require precise
+timing and responses. High-level languages do not give programmers exact control over
+machine code generated by compilers. Assembly language permits you to precisely specify a
+program’s executable code.
+• Computer game consoles require their software to be highly optimized for small code size and fast
+execution. Game programmers are experts at writing code that takes full advantage of hardware
+features in a target system. They often use assembly language as their tool of choice because it
+permits direct access to computer hardware, and code can be hand optimized for speed.
+• Assembly language helps you to gain an overall understanding of the interaction between
+computer hardware, operating systems, and application programs. Using assembly language,
+you can apply and test theoretical information you are given in computer architecture and
+operating systems courses.
+• Some high-level languages abstract their data representation to the point that it becomes awkward to perform low-level tasks such as bit manipulation. In such an environment, programmers will often call subroutines written in assembly language to accomplish their goal.
+• Hardware manufacturers create device drivers for the equipment they sell. Device drivers
+are programs that translate general operating system commands into specific references to
+hardware details. Printer manufacturers, for example, create a different MS-Windows device
+driver for each model they sell. Often these device drivers contain significant amounts of
+assembly language code.
+Are There Rules in Assembly Language? Most rules in assembly language are based on
+physical limitations of the target processor and its machine language. The CPU, for example,
+requires two instruction operands to be the same size. Assembly language has fewer rules than
+C++ or Java because the latter use syntax rules to reduce unintended logic errors at the expense
+of low-level data access. Assembly language programmers can easily bypass restrictions characteristic of high-level languages. Java, for example, does not permit access to specific memory
+addresses. One can work around the restriction by calling a C function using JNI (Java Native
+Interface) classes, but the resulting program can be awkward to maintain. Assembly language,
+on the other hand, can access any memory address. The price for such freedom is high: Assembly language programmers spend a lot of time debugging!
+6 Chapter 1 • Basic Concepts
+1.1.2 Assembly Language Applications
+In the early days of programming, most applications were written partially or entirely in assembly language. They had to fit in a small area of memory and run as efficiently as possible on slow
+processors. As memory became more plentiful and processors dramatically increased in speed,
+programs became more complex. Programmers switched to high-level languages such as C,
+FORTRAN, and COBOL that contained a certain amount of structuring capability. More
+recently, object-oriented languages such as Python, C++, C#, and Java have made it possible to
+write complex programs containing millions of lines of code.
+It is rare to see large application programs coded completely in assembly language because
+they would take too much time to write and maintain. Instead, assembly language is used to optimize certain sections of application programs for speed and to access computer hardware.
+Table 1-1 compares the adaptability of assembly language to high-level languages in relation to
+various types of applications.""")
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.help_tab), _translate("MainWindow", "Help"))
-        self.mainEditor.setPlaceholderText(_translate("MainWindow", "Ya Ali, Az Haminja Shorou kon ...  :)\nfaghat mesle adam code bezan"))
+        self.mainEditor.setPlaceholderText(
+            _translate("MainWindow", "Ya Ali, Az Haminja Shorou kon ...  :)\nfaghat mesle adam code bezan"))
         self.run_button.setText(_translate("MainWindow", "Run"))
 
         self.eax_value.setHtml(_translate("MainWindow",
