@@ -332,7 +332,7 @@ Table 1-1 compares the adaptability of assembly language to high-level languages
 various types of applications.""")
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.help_tab), _translate("MainWindow", "Help"))
         self.mainEditor.setPlaceholderText(
-            _translate("MainWindow", "Ya Ali, Az Haminja Shorou kon ...  :)\nfaghat mesle adam code bezan"))
+            _translate("MainWindow", "Ya Ali, Az Haminja Shorou kon ...  :)"))
         self.run_button.setText(_translate("MainWindow", "Run"))
 
         self.eax_value.setHtml(_translate("MainWindow",
